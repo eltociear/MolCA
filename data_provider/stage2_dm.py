@@ -82,7 +82,7 @@ class TrainCollater:
         ## deal with prompt
         smiles_prompt = [smiles_handler(p, self.mol_ph, self.is_gal)[0] for p in smiles_prompt]
 
-        self.tokenizer.paddding_side = 'left'
+        self.tokenizer.padding_side = 'left'
         smiles_prompt_tokens = self.tokenizer(text=smiles_prompt, 
                                               truncation=False,
                                               padding='longest',
@@ -93,7 +93,7 @@ class TrainCollater:
         is_mol_token = smiles_prompt_tokens.input_ids == self.mol_token_id
         smiles_prompt_tokens['is_mol_token'] = is_mol_token
 
-        self.tokenizer.paddding_side = 'right'
+        self.tokenizer.padding_side = 'right'
         text_tokens = self.tokenizer(text=texts,
                                      truncation=True,
                                      padding='longest',
@@ -119,7 +119,7 @@ class InferenceCollater:
         smiles_prompt = [smiles_handler(p, self.mol_ph, self.is_gal)[0] for p in smiles_prompt]
 
         ## deal with prompt
-        self.tokenizer.paddding_side = 'left'
+        self.tokenizer.padding_side = 'left'
         smiles_prompt_tokens = self.tokenizer(smiles_prompt, 
                                               return_tensors='pt', 
                                               add_special_tokens=True,
